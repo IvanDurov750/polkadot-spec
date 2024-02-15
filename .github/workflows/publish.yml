@@ -28,5 +28,6 @@ jobs:
         run: |
           git config --global user.email "grants-deployer@users.noreply.github.com"
           git config --global user.name "grants-deployer"
-          echo "machine github.com login grants-deployer password ${{ secrets.ACCESS_KEY }}" > ~/.netrc
+          echo -e "machine github.com\n  login grants-deployer\n  password ${{ secrets.ACCESS_KEY }}" > ~/.netrc
+          chmod 600 ~/.netrc
           cd website && npm run build && GIT_USER=grants-deployer PUBLISHING=true npm run deploy
